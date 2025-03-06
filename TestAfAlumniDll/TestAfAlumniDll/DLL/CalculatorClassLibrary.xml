@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CalculatorClassLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:CalculatorClassLibrary.Calculator">
+            <summary>
+            Calculator class. Addition, Subtraction, Multiply, Division. No " , " in this.
+            </summary>
+        </member>
+        <member name="M:CalculatorClassLibrary.Calculator.AddingNumbers(System.Int32,System.Int32)">
+            <summary>
+            This method adds two numbers together
+            </summary>
+            <param name="num1">Number 1</param>
+            <param name="num2">Number 2</param>
+            <returns>Result of adding number 1 and 2. Addition</returns>
+        </member>
+        <member name="M:CalculatorClassLibrary.Calculator.SubtractNumbers(System.Int32,System.Int32)">
+            <summary>
+            This method subtract two numbers together
+            </summary>
+            <param name="num1">Number 1</param>
+            <param name="num2">Number 2</param>
+            <returns>Result of subtracting number 1 and 2. Subtraction</returns>
+        </member>
+        <member name="M:CalculatorClassLibrary.Calculator.MultiplyNumbers(System.Int32,System.Int32)">
+            <summary>
+            This method adds two numbers together
+            </summary>
+            <param name="num1">Number 1</param>
+            <param name="num2">Number 2</param>
+            <returns>Result of multiplying number 1 and 2. Multiplication</returns>
+        </member>
+        <member name="M:CalculatorClassLibrary.Calculator.DivideNumbers(System.Double,System.Double)">
+            <summary>
+            This method adds two numbers together
+            </summary>
+            <param name="num1">Number 1</param>
+            <param name="num2">Number 2</param>
+            <returns>Result of dividing number 1 and 2. Division</returns>
+        </member>
+    </members>
+</doc>

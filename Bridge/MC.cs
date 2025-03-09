@@ -18,7 +18,7 @@ namespace Bridge
         {
             if(broBizz == true) 
             {
-                return 120 * discount;
+                return 120 * broBizzDiscount;
             }
             else
             {

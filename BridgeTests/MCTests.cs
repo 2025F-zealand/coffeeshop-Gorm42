@@ -40,7 +40,7 @@ namespace Bridge.MCTests
 
 
         [TestMethod()]
-        public void TestVehicleReturnsMC()
+        public void TestMCClassVehicleTypeReturnsMC()
         {
             //Arrange
             MC mcReturn = new MC("1234567");

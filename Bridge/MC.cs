@@ -14,6 +14,12 @@ namespace Bridge
             LicensePlate = licensePlate;
         }
 
+
+        /// <summary>
+        /// Method that checks if the motorcyclist have a broBizz or not and then gives them a discount if they do.
+        /// </summary>
+        /// <param name="broBizz"></param>
+        /// <returns>price</returns>
         public double Price(bool broBizz)
         {
             if(broBizz == true) 
@@ -27,7 +33,7 @@ namespace Bridge
                 
         }
 
-        public string Vehicle()
+        public string VehicleType()
         {
             return "MC";
         }

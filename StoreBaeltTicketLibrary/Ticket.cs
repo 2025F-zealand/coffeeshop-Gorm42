@@ -1,15 +1,37 @@
-﻿using System;
-namespace Bridge
+﻿using Bridge;
+namespace StoreBaeltTicketLibrary
 {
-    public class Car : Vehicle
+    public class Ticket
     {
+        public readonly double broBizzDiscount = 0.90;
+        private readonly Car car;
+        private readonly MC mC;
 
+        private string _licensePlate;
 
-        public Car(string licensePlate)
+        /// <summary>
+        /// Property for the license plate of the vehicle, have a constraint where the license plate must be 7 characters long.
+        /// </summary>
+        public string LicensePlate
         {
-            LicensePlate = licensePlate;            
+            get { return _licensePlate; }
+            set
+            {
+                if (value.Length < 7)
+                {
+                    throw new ArgumentException("License plate must be 7 characters long");
+                }
+                else
+                {
+                    value = _licensePlate;
+                }
+            }
         }
 
+        public Ticket(string licensePlate) 
+        {
+            LicensePlate = licensePlate;
+        }
 
         /// <summary>
         /// Allright. So. This method for the cars checks a couple of things. First off, we send a bool with the method, to see if the car-ist, 
@@ -21,12 +43,12 @@ namespace Bridge
         /// </summary>
         /// <param name="haveBroBizz"></param>
         /// <returns> double. 230 without any discounts.</returns>
-        public double Price(bool haveBroBizz)
+        public double PriceForCars(bool haveBroBizz)
         {
             bool isItWeekend = DayOfTheWeekMethod();
             double priceCounter = 0;
-            double weekendDiscount = 0.85;  
-                      
+            double weekendDiscount = 0.85;
+
 
             if (isItWeekend == true)
             {
@@ -49,6 +71,23 @@ namespace Bridge
             }
         }
 
+        /// <summary>
+        /// Method that checks if the motorcyclist have a broBizz or not and then gives them a discount if they do.
+        /// </summary>
+        /// <param name="broBizz"></param>
+        /// <returns>price</returns>
+        public double PriceForMotorCycles(bool broBizz)
+        {
+            if (broBizz == true)
+            {
+                return 120 * broBizzDiscount;
+            }
+            else
+            {
+                return 120;
+            }
+
+        }
 
         /// <summary>
         /// A method to be used in price to determine whether or not there should be a weekend discount. If it is Saturday or Sunday, the method
@@ -70,22 +109,14 @@ namespace Bridge
         }
         //https://stackoverflow.com/questions/4139287/get-the-monday-and-sunday-for-a-certain-datetime-in-c-sharp
 
-        //public double WeekEndPrice()
-        //{
-        //    bool isItWeekend = dayOfTheWeekRepo.DayOfTheWeekMethod();
-        //    double priceCounter = 0;
-        //    double weekendDiscount = 0.85;
-        //
-        //    if (isItWeekend == true)
-        //    {
-        //        priceCounter = 230 * weekendDiscount;
-        //    }
-        //    return priceCounter;
-        //}
-
+        /// <summary>
+        /// Method to return the type of vehicle.
+        /// </summary>
+        /// <returns></returns>
         public string VehicleType()
         {
             return "Car";
         }
+
     }
 }

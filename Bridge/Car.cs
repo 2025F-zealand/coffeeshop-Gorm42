@@ -1,13 +1,21 @@
 ﻿namespace Bridge
 {
-    public class Car
+    public class Car : Vehicle
     {
-        public string LicensePlate { get; set; }
-        public DateTime Date { get; set; }
-
-        public double Price()
+        public Car(string licensePlate)
         {
-            return 230;
+            LicensePlate = licensePlate;
+        }
+        public double Price(bool haveBroBizz)
+        {
+            if (haveBroBizz == true)
+            {
+                return 230 * discount;
+            }
+            else
+            {
+                return 230;
+            }
         }
 
         public string VehicleType()

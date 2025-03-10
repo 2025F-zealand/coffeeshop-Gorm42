@@ -36,18 +36,77 @@ namespace MandatoryAssignmentServer
         public void DoOneClient(TcpClient socket)
         {
 
-            StreamReader reader = new StreamReader(socket.GetStream()); //Læser fra socket
-            StreamWriter writer = new StreamWriter(socket.GetStream()); //Skriver til socket
-            writer.AutoFlush = true;
+            try
+            {
+                using (StreamReader reader = new StreamReader(socket.GetStream()))
+                using (StreamWriter writer = new StreamWriter(socket.GetStream()))
+                {
+                    writer.AutoFlush = true;
 
-            //Her begynder protokollen
+                    // Step 1: Læser kommando fra klienten.
+                    string? command = reader.ReadLine();
+                    Console.WriteLine("Received command: " + command);
 
-            string? line = reader.ReadLine();
-            Console.WriteLine("Line from client is: " + line);
-            line = line.ToUpper();
-            writer.WriteLine(line);
+                    // Step 2: sender tilbage til socket "Input numbers".
+                    writer.WriteLine("Input numbers");
 
-            socket?.Close();
+                    // Step 2: Læser to tal fra socket med mellemrum.
+                    string? numbersLine = reader.ReadLine();
+                    Console.WriteLine("Received numbers: " + numbersLine);
+                    if (numbersLine == null)
+                    {
+                        writer.WriteLine("Error: No numbers received.");
+                        return;
+                    }
+
+                    string[] parts = numbersLine.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                    if (parts.Length < 2)
+                    {
+                        writer.WriteLine("Error: Expected two numbers separated by space.");
+                        return;
+                    }
+
+                    if (!int.TryParse(parts[0], out int number1) || !int.TryParse(parts[1], out int number2))
+                    {
+                        writer.WriteLine("Error: Invalid number format.");
+                        return;
+                    }
+
+                    int result = 0;
+                    // Bruger switch-case til at vælge hvilken operation der skal udføres.
+                    switch (command?.Trim().ToUpper())
+                    {
+                        case "RANDOM":
+                            // Ensure correct order for Random.Next(min, max+1)
+                            int min = Math.Min(number1, number2);
+                            int max = Math.Max(number1, number2);
+                            Random rand = new Random();
+                            result = rand.Next(min, max + 1);
+                            break;
+                        case "ADD":
+                            result = number1 + number2;
+                            break;
+                        case "SUBTRACT":
+                            result = number1 - number2;
+                            break;
+                        default:
+                            writer.WriteLine("Unknown command.");
+                            return;
+                    }
+
+                    // Send the result back to the client
+                    writer.WriteLine(result);
+                    Console.WriteLine("Sent result: " + result);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error handling client: " + ex.Message);
+            }
+            finally
+            {
+                socket.Close();
+            }
 
         }
     }

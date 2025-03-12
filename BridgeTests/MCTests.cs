@@ -48,7 +48,7 @@ namespace Bridge.MCTests
             //Act
 
             //Assert
-            Assert.AreEqual(mcReturn.Vehicle(), expectedReturn);
+            Assert.AreEqual(mcReturn.VehicleType(), expectedReturn);
         }
     }
 }

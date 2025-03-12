@@ -25,13 +25,7 @@ namespace MandatoryAssignmentServer
                     DoOneClient(tempSocket);
                 });
                 
-            }
-
-            //StreamReader reader = new StreamReader(socket.GetStream()); //Læser fra socket
-            //StreamWriter writer = new StreamWriter(socket.GetStream()); //Skriver til socket
-            ////Nu kan vi læse og skrive string.
-            //writer.AutoFlush = true;
-                                   
+            }                                   
         }
 
         public void DoOneClient(TcpClient socket)

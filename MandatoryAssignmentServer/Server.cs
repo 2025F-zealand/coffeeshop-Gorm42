@@ -15,7 +15,7 @@ namespace MandatoryAssignmentServer
             TcpListener server = new TcpListener(PORTNUMMER);
             server.Start();
             Console.WriteLine("Server startet at port" + PORTNUMMER);
-
+            
             while (true)
             {
                 TcpClient socket = server.AcceptTcpClient(); //Svarer til en socket. Venter på 3-way handskake.
@@ -24,6 +24,7 @@ namespace MandatoryAssignmentServer
                     TcpClient tempSocket = socket;
                     DoOneClient(tempSocket);
                 });
+                
             }
 
             //StreamReader reader = new StreamReader(socket.GetStream()); //Læser fra socket
@@ -35,79 +36,68 @@ namespace MandatoryAssignmentServer
 
         public void DoOneClient(TcpClient socket)
         {
+            StreamReader reader = new StreamReader(socket.GetStream());
+            StreamWriter writer = new StreamWriter(socket.GetStream());
+            writer.AutoFlush = true;
 
-            try
+            int attempts = 0;
+            bool validCommand = false;
+
+            while (attempts < 3)
             {
-                using (StreamReader reader = new StreamReader(socket.GetStream()))
-                using (StreamWriter writer = new StreamWriter(socket.GetStream()))
+                writer.WriteLine("Random, Add or Subtract?"); // Step 1: Ask for input
+                string? command = reader.ReadLine();
+                if (command == null) break; // Exit if no input
+
+                command = command.Trim().ToLower();
+
+                if (command == "random" || command == "add" || command == "subtract")
                 {
-                    writer.AutoFlush = true;
+                    validCommand = true;
+                    writer.WriteLine("Input numbers"); // Step 2: Prompt for numbers
 
-                    // Step 1: Læser kommando fra klienten.
-                    string? command = reader.ReadLine();
-                    Console.WriteLine("Received command: " + command);
+                    string? numberInput = reader.ReadLine();
+                    if (numberInput == null) break; // Exit if no input
 
-                    // Step 2: sender tilbage til socket "Input numbers".
-                    writer.WriteLine("Input numbers");
-
-                    // Step 2: Læser to tal fra socket med mellemrum.
-                    string? numbersLine = reader.ReadLine();
-                    Console.WriteLine("Received numbers: " + numbersLine);
-                    if (numbersLine == null)
+                    string[] parts = numberInput.Split(' ');
+                    if (parts.Length != 2 || !int.TryParse(parts[0], out int num1) || !int.TryParse(parts[1], out int num2))
                     {
-                        writer.WriteLine("Error: No numbers received.");
-                        return;
-                    }
-
-                    string[] parts = numbersLine.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                    if (parts.Length < 2)
-                    {
-                        writer.WriteLine("Error: Expected two numbers separated by space.");
-                        return;
-                    }
-
-                    if (!int.TryParse(parts[0], out int number1) || !int.TryParse(parts[1], out int number2))
-                    {
-                        writer.WriteLine("Error: Invalid number format.");
-                        return;
+                        writer.WriteLine("Invalid numbers. Connection closing.");
+                        break;
                     }
 
                     int result = 0;
-                    // Bruger switch-case til at vælge hvilken operation der skal udføres.
-                    switch (command?.Trim().ToUpper())
+                    if (command == "random")
                     {
-                        case "RANDOM":
-                            // Ensure correct order for Random.Next(min, max+1)
-                            int min = Math.Min(number1, number2);
-                            int max = Math.Max(number1, number2);
-                            Random rand = new Random();
-                            result = rand.Next(min, max + 1);
-                            break;
-                        case "ADD":
-                            result = number1 + number2;
-                            break;
-                        case "SUBTRACT":
-                            result = number1 - number2;
-                            break;
-                        default:
-                            writer.WriteLine("Unknown command.");
-                            return;
+                        Random rand = new Random();
+                        result = rand.Next(Math.Min(num1, num2), Math.Max(num1, num2) + 1);
+                    }
+                    else if (command == "add")
+                    {
+                        result = num1 + num2;
+                    }
+                    else if (command == "subtract")
+                    {
+                        result = num1 - num2;
                     }
 
-                    // Send the result back to the client
-                    writer.WriteLine(result);
-                    Console.WriteLine("Sent result: " + result);
+                    writer.WriteLine(result); // Step 4: Send result
+                    break;
+                }
+                else
+                {
+                    attempts++;
+                    writer.WriteLine($"Invalid command. {3 - attempts} attempts remaining.");
                 }
             }
-            catch (Exception ex)
+
+            if (!validCommand)
             {
-                Console.WriteLine("Error handling client: " + ex.Message);
-            }
-            finally
-            {
-                socket.Close();
+                writer.WriteLine("Too many failed attempts. Disconnecting.");
             }
 
+            socket.Close();
         }
+
     }
 }

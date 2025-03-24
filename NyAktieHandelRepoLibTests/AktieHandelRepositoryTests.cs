@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NyAktieHandelRepoLib.Tests
 {
-    [TestClass()]
+    [TestClass()] //
     public class AktieHandelRepositoryTests
     {
         [TestMethod()]

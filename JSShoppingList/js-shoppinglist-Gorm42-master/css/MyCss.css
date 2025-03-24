@@ -1,0 +1,38 @@
+#content {
+  color: #0091aa; }
+
+h2, h1 {
+  color: #be4a14; }
+
+ul {
+  background-color: #584f4d;
+  border: none;
+  padding: 0;
+  margin: 0; }
+
+li {
+  background-color: #ec8b68;
+  color: #fff;
+  border-top: 1px solid #fe9772;
+  border-bottom: 1px solid #9f593f;
+  font-size: 24px;
+  letter-spacing: .05em;
+  list-style-type: none;
+  text-shadow: 2px 2px 1px #9f593f;
+  height: 50px;
+  padding-left: 1em;
+  padding-top: 10px; }
+
+.unhealthy {
+  background-color: red;
+  color: #fff;
+  text-shadow: 2px 2px 1px #914141;
+  border-top: 1px solid #e99295;
+  border-bottom: 1px solid #914141; }
+
+.healthy {
+  background-color: #6cc0ac;
+  color: #fff;
+  text-shadow: 2px 2px 1px #3b6a5e;
+  border-top: 1px solid #7ee0c9;
+  border-bottom: 1px solid #3b6a5e; }

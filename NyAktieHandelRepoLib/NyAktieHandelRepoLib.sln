@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NyAktieHandelRepoLib", "NyAktieHandelRepoLib.csproj", "{7970B90B-C172-41A5-869D-F8E93DFE115E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NyAktieHandelRepoLibTests", "..\NyAktieHandelRepoLibTests\NyAktieHandelRepoLibTests.csproj", "{027F1289-C4D4-42DF-B10E-6A5DBCBA626A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7970B90B-C172-41A5-869D-F8E93DFE115E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7970B90B-C172-41A5-869D-F8E93DFE115E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7970B90B-C172-41A5-869D-F8E93DFE115E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7970B90B-C172-41A5-869D-F8E93DFE115E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{027F1289-C4D4-42DF-B10E-6A5DBCBA626A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{027F1289-C4D4-42DF-B10E-6A5DBCBA626A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{027F1289-C4D4-42DF-B10E-6A5DBCBA626A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{027F1289-C4D4-42DF-B10E-6A5DBCBA626A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {31FD67B1-1B3D-4E51-A12F-4E9BA4C3A76F}
+	EndGlobalSection
+EndGlobal

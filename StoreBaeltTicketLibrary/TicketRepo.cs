@@ -7,7 +7,7 @@ using Bridge;
 
 namespace StoreBaeltTicketLibrary
 {
-    public class TicketRepo
+    public class TicketRepo : ITicketRepo
     {
         static List<Ticket> tickets = new List<Ticket>();
 

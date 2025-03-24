@@ -12,7 +12,8 @@ namespace StoreBaeltTicketLibrary
 
         void AddTicket(Ticket ticket);
         List<Ticket> GetAllTickets();
-        
-        
+        List<Ticket> GetAllTicketsForOneLicensePlate(string licensePlate);
+
+
     }
 }

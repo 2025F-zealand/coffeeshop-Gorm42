@@ -8,6 +8,9 @@ namespace AktieHandelRepositoryLib
 {
     public class AktieHandelRepository 
     {
+        //opgaveformulering fra den 27.02.25
+        // create database https://learn.microsoft.com/en-us/sql/relational-databases/databases/create-a-database?view=sql-server-ver16
+        // save the connection-string https://learn.microsoft.com/en-us/visualstudio/data-tools/how-to-save-and-edit-connection-strings?view=vs-2022
         //Field vs. property : https://stackoverflow.com/questions/295104/what-is-the-difference-between-a-field-and-a-property
         private List<Aktie> AktieListe;
         private int _nextId = 1;
